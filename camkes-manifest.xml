@@ -66,14 +66,11 @@
   
 
   <!-- Apply Sparrow kernel patch -->
-  <project name="sparrow-kernel" revision="sparrow"      remote="sparrow"  path="kata/kernel"
-           revision="1fd6d83ea3fe6776f0e9fbe52b5eaf8da89a41cb" />
+  <project name="sparrow-kernel" revision="sparrow"      remote="sparrow"  path="kata/kernel" />
   <!-- Download Processmanager -->
-  <project name="sparrow-kata" revision="main" remote="sparrow" path="projects/processmanager"
-           revision="6fe5b9078cd47083ae834e81482576272f7b9b7e" />
+  <project name="sparrow-kata" revision="main" remote="sparrow" path="projects/processmanager" />
   <!-- Download and patch sparrow's capdl for pathnames -->
-  <project name="sparrow-capdl" revision="sparrow" remote="sparrow"  path="projects/capdl"
-           revision="177ce4df2aa8affacc8067d34f2d94138e02283b" />
+  <project name="sparrow-capdl" revision="sparrow" remote="sparrow"  path="projects/capdl" />
   <!-- Download the build scripts -->
   <project name="sparrow-scripts" revision="main" remote="sparrow" path="scripts" />
 </manifest>

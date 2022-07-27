@@ -19,10 +19,6 @@
 
   <project name="cakeml_libs.git" path="projects/cakeml_libs"
            revision="0d3f232e795a7e79bd3ecd831636507711275a0a" upstream="master" dest-branch="master"/>
-  <project name="camkes-tool.git" path="projects/camkes-tool"
-           revision="d3a0e82a909976cf6e26d09ddf1668dc1b843e04" upstream="master" dest-branch="master">
-    <linkfile src="docs/index.md" dest="README.md"/>
-  </project>
   <project name="camkes.git" path="projects/camkes"
            revision="20ef3480ee2f3dfc0a36b80ccf44b56c903c76af" upstream="master" dest-branch="master">
     <linkfile src="easy-settings.cmake" dest="easy-settings.cmake"/>
@@ -65,11 +61,13 @@
   
   
 
-  <!-- Apply Sparrow kernel patch -->
-  <project name="sparrow-kernel" revision="sparrow"      remote="sparrow"  path="kata/kernel" />
-  <!-- Download Processmanager -->
-  <project name="sparrow-kata" revision="main" remote="sparrow" path="projects/processmanager" />
-  <!-- Download and patch sparrow's capdl for pathnames -->
+  <!-- Download Sparrow camkes-tool (mods + temploates) -->
+  <project name="sparrow-camkes-tool" revision="sparrow" remote="sparrow" path="projects/camkes-tool" />
+  <!-- Download Sparrow's kernel (patches + drivers) -->
+  <project name="sparrow-kernel" revision="sparrow" remote="sparrow"  path="kernel" />
+  <!-- Download KataOS CAmkES components -->
+  <project name="sparrow-kata" revision="main" remote="sparrow" path="projects/kata" />
+  <!-- Download Sparrow's capdl -->
   <project name="sparrow-capdl" revision="sparrow" remote="sparrow"  path="projects/capdl" />
   <!-- Download the build scripts -->
   <project name="sparrow-scripts" revision="main" remote="sparrow" path="scripts" />

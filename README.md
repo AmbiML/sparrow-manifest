@@ -102,11 +102,14 @@ own projects.
 ``` shell
 mkdir sparrow
 cd sparrow
-repo init -u https://github.com/google/AmbiML/sparrow-manifest -m camkes-manifest.xml
+repo init -u https://github.com/AmbiML/sparrow-manifest -m camkes-manifest.xml
 repo sync -j$(nproc)
 sh scripts/build-sparrow.sh aarch64
 (cd build-aarch64; ./simulate -M raspi3b)
 ```
+
+[Beware that if your repo tool is out of date you may need to supply `-b main`
+to the init request as older versions of repo only check for a `master` branch.]
 
 Note the above assumes you have the follow prerequisites installed on your system
 and **in your shell's search path**:
@@ -122,7 +125,7 @@ to download and piece together Sparrow git repositories as well as dependent pro
 repositories such as [seL4](https://github.com/seL4).
 
 ``` shell
-$ repo init -u https://github.com/google/AmbiML/sparrow-manifest -m camkes-manifest.xml
+$ repo init -u https://github.com/AmbiML/sparrow-manifest -m camkes-manifest.xml
 Downloading Repo source from https://gerrit.googlesource.com/git-repo
 
 repo has been initialized in <your-directory>/sparrow/
@@ -204,7 +207,7 @@ To use crates from Sparrow you can reference them from a local repository or
 directly from GitHub using git; e.g. in a Config.toml:
 ```
 kata-os-common = { path = "../system/components/kata-os-common" }
-kata-os-common = { git = "https://github.com/google/AmbiML/sparrow/kata" }
+kata-os-common = { git = "https://github.com/AmbiML/sparrow/kata" }
 ```
 NB: the git usage depends on cargo's support for searching for a crate
 named "kata-os-common" in the kata repo.

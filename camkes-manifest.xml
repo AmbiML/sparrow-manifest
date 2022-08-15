@@ -71,4 +71,11 @@
   <project name="sparrow-capdl" revision="sparrow" remote="sparrow"  path="projects/capdl" />
   <!-- Download the build scripts -->
   <project name="sparrow-scripts" revision="main" remote="sparrow" path="scripts" />
+
+  <!-- Download Sparrow manifest in order to setup top-level symlinks -->
+  <project name="sparrow-manifest" revision="main" revision="sparrow" path="manifest">
+    <linkfile src="README.md" dest="README.md" />
+    <linkfile src="CONTRIBUTING.md" dest="CONTRIBUTING.md" />
+    <linkfile src="LICENSE" dest="LICENSE" />
+  </project>
 </manifest>

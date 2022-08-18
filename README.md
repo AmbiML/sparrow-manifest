@@ -114,10 +114,11 @@ to the init request as older versions of repo only check for a `master` branch.]
 Note the above assumes you have the follow prerequisites installed on your system
 and **in your shell's search path**:
 1. Gcc (or clang) for the target architecture
-2. Rust; at the moment this must be nightly-2021-11-05-x86_64-unknown-linux-gnu (or be
-   prepared to edit at least build-sparrow.sh). Beware that we override the default TLS
-   model to match what CAmkES uses and this override is not supported by stable versions of Rust.
-3. Whichever simulator seL4 expects for your target architecture; e.g. for aarch64 this
+2. Rust; at the moment this must be nightly-2021-11-05 (or be prepared to edit at least
+   build-sparrow.sh). Beware that we override the default TLS model to match what CAmkES
+   uses and this override is not supported by stable versions of Rust.
+3. The python tempita module.
+4. Whichever simulator seL4 expects for your target architecture; e.g. for aarch64 this
    is qemu-system-aarch64.
 
 Sparrow uses [repo](https://gerrit.googlesource.com/git-repo/+/refs/heads/master/README.md)

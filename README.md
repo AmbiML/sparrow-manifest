@@ -121,6 +121,9 @@ and **in your shell's search path**:
 4. Whichever simulator seL4 expects for your target architecture; e.g. for aarch64 this
    is qemu-system-aarch64.
 
+Because Sparrow is a CAmkES project you also need
+[CAmkES dependencies](https://docs.sel4.systems/projects/buildsystem/host-dependencies.html#camkes-build-dependencies).
+
 Sparrow uses [repo](https://gerrit.googlesource.com/git-repo/+/refs/heads/master/README.md)
 to download and piece together Sparrow git repositories as well as dependent projects /
 repositories such as [seL4](https://github.com/seL4).

@@ -44,33 +44,35 @@
            revision="6df378e8d91856d204e4d024796b91c6802d0501" upstream="master" dest-branch="master"/>
   <project name="rumprun.git" path="tools/rumprun"
            revision="04464ab931c28ca1c78e807741d82a4792660183" upstream="master" dest-branch="master"/>
-  <project name="seL4_libs.git" path="projects/seL4_libs"
-           revision="bc943c9917ca02c21f162e76938b86a8325c64d9" upstream="master" dest-branch="master"/>
   <project name="seL4_projects_libs.git" path="projects/seL4_projects_libs"  remote="seL4-github"
            revision="a6fbc13c792ef518e5bcf1da69c8d27b6cd19814" upstream="master" dest-branch="master"/>
-  <project name="seL4_tools.git" path="tools/seL4"
-           revision="553086aab4c9fb9c4869060fe51a3e95c20ce454" upstream="master" dest-branch="master">
-    <linkfile src="cmake-tool/init-build.sh" dest="init-build.sh"/>
-    <linkfile src="cmake-tool/griddle" dest="griddle"/>
-  </project>
-  <project name="sel4runtime" path="projects/sel4runtime"
-           revision="d935dd05da0cf959e9fd0140af913dc6fdaa0221" upstream="master" dest-branch="master"/>
-  <project name="util_libs.git" path="projects/util_libs" revision="b0cedde66a6b5a3ef1bc072f9a08a4e6bd68935c"
-           upstream="master" dest-branch="master"/>
   <!-- 3p crates mirror'd for reliability -->
   
   
 
-  <!-- Download Sparrow camkes-tool (mods + temploates) -->
+  <!-- Download Sparrow camkes-tool (mods + templates) -->
   <project name="sparrow-camkes-tool" revision="sparrow" remote="sparrow" path="projects/camkes-tool" />
   <!-- Download Sparrow's kernel (patches + drivers) -->
   <project name="sparrow-kernel" revision="sparrow" remote="sparrow"  path="kernel" />
   <!-- Download KataOS CAmkES components -->
-  <project name="sparrow-kata" revision="main" remote="sparrow" path="projects/kata" />
+  <project name="sparrow-kata-full" revision="main" remote="sparrow" path="projects/kata" />
   <!-- Download Sparrow's capdl -->
   <project name="sparrow-capdl" revision="sparrow" remote="sparrow"  path="projects/capdl" />
+  <!-- Download Sparrow's seL4_libs -->
+  <project name="sparrow-seL4_libs" revision="sparrow" remote="sparrow" path="projects/seL4_libs" />
+  <!-- Download Sparrow's seL4_tools -->
+  <project name="sparrow-seL4_tools" revision="sparrow" remote="sparrow" path="tools/seL4">
+    <linkfile src="cmake-tool/init-build.sh" dest="init-build.sh"/>
+    <linkfile src="cmake-tool/griddle" dest="griddle"/>
+  </project>
+  <!-- Download Sparrow's sel4runtime -->
+  <project name="sparrow-sel4runtime" revision="sparrow" remote="sparrow" path="projects/sel4runtime" />
+  <!-- Download Sparrow's sel4test -->
+  <project name="sparrow-sel4test" revision="sparrow" remote="sparrow" path="projects/sel4test" />
+  <!-- Download Sparrow's util_libs -->
+  <project name="sparrow-util_libs" revision="sparrow" remote="sparrow" path="projects/util_libs" />
   <!-- Download the build scripts -->
-  <project name="sparrow-scripts" revision="main" remote="sparrow" path="scripts" />
+  <project name="sparrow-scripts-full" revision="main" remote="sparrow" path="scripts" />
 
   <!-- Download Sparrow manifest in order to setup top-level symlinks -->
   <project name="sparrow-manifest" revision="main" remote="sparrow" path="manifest">

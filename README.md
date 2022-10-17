@@ -81,7 +81,7 @@ hardware design. Renode allows us to do rapid software/hardware co-design of
 our multi-core RISC-V target platform. The software environment is derived
 from those provided by seL4 & OpenTitan. Debugging leverages Renode facilites
 and [gdb talking to Renode](https://antmicro.com/blog/2022/06/sel4-userspace-debugging-with-gdb-extensions-in-renode/)
-for system softare and application developement.
+for system software and application development.
 
 [For this initial roll-out we are targetting aarch64 running on qemu.]
 

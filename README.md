@@ -4,11 +4,11 @@ Sparrow is a project to build a low-power secure embeded platform
 for Ambient ML applications. The target platform leverages
 [RISC-V](https://riscv.org/) and [OpenTitan](https://opentitan.org/).
 The Sparrow
-software includes a home-grown operating system named KataOS, that runs
+software includes a home-grown operating system named CantripOS, that runs
 on top of [seL4](https://github.com/seL4) and (ignoring the seL4 kernel)
 is written almost entirely in [Rust](https://www.rust-lang.org/).
 
-Sparrow (and KataOS) are definitely a work in progress. The KataOS
+Sparrow (and CantripOS) are definitely a work in progress. The CantripOS
 components are based on an augmented version of seL4's
 [CAmkES framework](https://docs.sel4.systems/projects/camkes/).
 Critical system services
@@ -18,7 +18,7 @@ system services.
 
 [Initially the Sparrow repository only includes the Rust frameworks
 for developing seL4 / CAmkES components. A later release will share
-the KataOS services including the MemoryManager and ProcessManager that
+the CantripOS services including the MemoryManager and ProcessManager that
 support dynamic operation of applications.]
 
 ## Sparrow software repositories (what's included here).
@@ -28,25 +28,25 @@ tool](https://gerrit.googlesource.com/git-repo/+/refs/heads/master/README.md).
 The following git repositories are currently available:
 
 - *camkes-tool*:
-    seL4's camkes-tool repository with additions to support KataOS services
+    seL4's camkes-tool repository with additions to support CantripOS services
 - *capdl*:
-    seL4's capdl repository with addition for KataOS services and the
-     KataOS rootserver (a replacement for capdl-loader-app that is written
-     in Rust and supports hand-off of system resources to the KataOS
+    seL4's capdl repository with addition for CantripOS services and the
+     CantripOS rootserver (a replacement for capdl-loader-app that is written
+     in Rust and supports hand-off of system resources to the CantripOS
      MemoryManager service)
 - *kernel*:
     seL4's kernel with drivers for Sparrow's RISC-V platform and support
-    for reclaiming the memory used by the KataOS rootserver
-- *kata*
-    frameworks for developing in Rust, and (eventually) the KataOS system services
+    for reclaiming the memory used by the CantripOS rootserver
+- *cantrip*
+    frameworks for developing in Rust, and (eventually) the CantripOS system services
 - *scripts*:
     support scripts including build-sparrow.sh
 
 [More software will be published as we deem it ready for sharing until eventually
 all of Sparrow (software and hardware designs) will be available.]
 
-Most KataOS Rust crates are in the *kata/apps/system/components* directory.
-Common/shared code is in *kata-os-common*:
+Most CantripOS Rust crates are in the *cantrip/apps/system/components* directory.
+Common/shared code is in *cantrip-os-common*:
 
 - *allocator*: a heap allocator built on the linked-list-allocator crate
 - *camkes*: support for writing CAmkES components in Rust
@@ -54,24 +54,24 @@ Common/shared code is in *kata-os-common*:
 - *copyregion*: a helper for temporarily mapping physical pages into a thread's VSpace
 - *cspace-slot*: an RAII helper for the *slot-allocator*
 - *logger*: seL4 integration with the Rust logger crate
-- *model*: support for processing capDL; used by the kata-os-rootserver
+- *model*: support for processing capDL; used by the cantrip-os-rootserver
 - *panic*: an seL4-specific panic handler
 - *sel4-config*: build glue for seL4 kernel configuration
 - *sel4-sys*: seL4 system interfaces & glue
 - *slot-allocator*: an allocator for slots in the top-level CNode
 
 The other main Rust piece is the rootserver application that is located in
-*projects/capdl/kata-os-rootserver*. This depends on the *capdl* and *model*
-submodules of *kata-os-common*. It is possible to select either kata-os-rootserver
+*projects/capdl/cantrip-os-rootserver*. This depends on the *capdl* and *model*
+submodules of *cantrip-os-common*. It is possible to select either cantrip-os-rootserver
 or the C-based capdl-loader-app with a CMake setting in the CAmkES project's
-easy-settings.cmake file; e.g. `projects/kata/easy-settings.cmake` has:
+easy-settings.cmake file; e.g. `projects/cantrip/easy-settings.cmake` has:
 
 ```
 #set(CAPDL_LOADER_APP "capdl-loader-app" CACHE STRING "")
-set(CAPDL_LOADER_APP "kata-os-rootserver" CACHE STRING "")
+set(CAPDL_LOADER_APP "cantrip-os-rootserver" CACHE STRING "")
 ```
 
-Beware that kata-os-rootserver has very limited testing and likely does not
+Beware that cantrip-os-rootserver has very limited testing and likely does not
 support and/or implement all the features of capdl-loader-app.
 
 ## How we do Sparrow software development.
@@ -174,11 +174,11 @@ Jumping to kernel-image entry point...
 Warning:  gpt_cntfrq 62500000, expected 19200000
 Bootstrapping kernel
 Booting all finished, dropped to user space
-kata_os_rootserver::Bootinfo: (725, 131072) empty slots 1 nodes (14, 74) untyped 131072 cnode slots
-kata_os_rootserver::Model: 676 objects 1 irqs 0 untypeds 1 asids
-kata_os_rootserver::capDL spec: 0.13 Mbytes
-kata_os_rootserver::CAmkES components: 1.07 Mbytes
-kata_os_rootserver::Rootserver executable: 1.31 Mbytes
+cantrip_os_rootserver::Bootinfo: (725, 131072) empty slots 1 nodes (14, 74) untyped 131072 cnode slots
+cantrip_os_rootserver::Model: 676 objects 1 irqs 0 untypeds 1 asids
+cantrip_os_rootserver::capDL spec: 0.13 Mbytes
+cantrip_os_rootserver::CAmkES components: 1.07 Mbytes
+cantrip_os_rootserver::Rootserver executable: 1.31 Mbytes
 <<seL4(CPU 0) [decodeARMFrameInvocation/2137 T0xffffff80004c7400 "rootserver" @44373c]: ARMPageMap: Attempting to remap a frame that does not belong to the passed address space>>
 client: what's the answer to 342 + 74 + 283 + 37 + 534 ?
 adder: Adding 342
@@ -210,16 +210,16 @@ seL4. To build your own seL4 / CAmkES projects you can follow the seL4
 To use crates from Sparrow you can reference them from a local repository or
 directly from GitHub using git; e.g. in a Config.toml:
 ```
-kata-os-common = { path = "../system/components/kata-os-common" }
-kata-os-common = { git = "https://github.com/AmbiML/sparrow/kata" }
+cantrip-os-common = { path = "../system/components/cantrip-os-common" }
+cantrip-os-common = { git = "https://github.com/AmbiML/sparrow/cantrip" }
 ```
 NB: the git usage depends on cargo's support for searching for a crate
-named "kata-os-common" in the kata repo.
+named "cantrip-os-common" in the cantrip repo.
 When using a git dependency a git tag can be used to lock the crate version.
 
 Note that many Sparrow crates need the seL4 kernel configuration
 (e.g. to know whether MCS is configured). This is handled by the
-kata-os-common/sel4-config crate that is used by a build.rs to import
+cantrip-os-common/sel4-config crate that is used by a build.rs to import
 kernel configuration parameters as Cargo features. In a Cargo.toml create
 a features manifest with the kernel parameters you need e.g.
 
@@ -234,8 +234,8 @@ then specify build-dependencies:
 
 ```
 [build-dependencies]
-# build.rs depends on SEL4_OUT_DIR = "${ROOTDIR}/out/kata/kernel"
-sel4-config = { path = "../../kata/apps/system/components/kata-os-common/src/sel4-config" }
+# build.rs depends on SEL4_OUT_DIR = "${ROOTDIR}/out/cantrip/kernel"
+sel4-config = { path = "../../cantrip/apps/system/components/cantrip-os-common/src/sel4-config" }
 ```
 
 and use a build.rs that includes at least:
@@ -249,7 +249,7 @@ fn main() {
     // location relative to the ROOTDIR env variable.
     println!("SEL4_OUT_DIR {:?}", env::var("SEL4_OUT_DIR"));
     let sel4_out_dir = env::var("SEL4_OUT_DIR")
-        .unwrap_or_else(|_| format!("{}/out/kata/kernel", env::var("ROOTDIR").unwrap()));
+        .unwrap_or_else(|_| format!("{}/out/cantrip/kernel", env::var("ROOTDIR").unwrap()));
     println!("sel4_out_dir {}", sel4_out_dir);
 
     // Dredge seL4 kernel config for settings we need as features to generate
@@ -267,7 +267,7 @@ Note how build.rs expects an SEL4_OUT_DIR environment variable that has the path
 the top of the kernel build area. The build-sparrow.sh script sets this for you but, for
 example, if you choose to run ninja directly you will need it set in your environment.
 
-Similar to SEL4_OUT_DIR the kata-os-common/src/sel4-sys crate that has the seL4 system
+Similar to SEL4_OUT_DIR the cantrip-os-common/src/sel4-sys crate that has the seL4 system
 call wrappers for Rust programs requires an SEL4_DIR envronment variable that has the
 path to the top of the kernel sources. This also is set by build-sparrow.sh.
 

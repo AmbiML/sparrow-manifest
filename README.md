@@ -83,9 +83,9 @@ their own SDK and associated runtime tailored to their needs.
 
 The other main Rust piece is the rootserver application that is located in
 *projects/capdl/cantrip-os-rootserver*. This depends on the *capdl* and *model*
-submodules of *cantrip-os-common*. While it is possible to select either
-cantrip-os-rootserver or the C-based capdl-loader-app with a CMake setting
-in the CAmkES project's easy-settings.cmake file; e.g. `projects/cantrip/easy-settings.cmake` has:
+submodules of *cantrip-os-common*. It is possible to select either cantrip-os-rootserver
+or the C-based capdl-loader-app with a CMake setting in the CAmkES project's
+easy-settings.cmake file; e.g. `projects/cantrip/easy-settings.cmake` has:
 
 ```
 #set(CAPDL_LOADER_APP "capdl-loader-app" CACHE STRING "")

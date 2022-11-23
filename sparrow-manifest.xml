@@ -53,13 +53,13 @@
   <!-- Download Sparrow camkes-tool (mods + templates) -->
   <project name="sparrow-camkes-tool" revision="sparrow" remote="sparrow" path="cantrip/projects/camkes-tool" />
   <!-- Download Sparrow's kernel (patches + drivers) -->
-  <project name="cantrip/kernel" remote="sparrow"  path="cantrip/kernel" />
+  <project name="sparrow-kernel" revision="sparrow" remote="sparrow"  path="cantrip/kernel" />
   <!-- Download CantripOS CAmkES components -->
-  <project name="cantrip/projects/processmanager" remote="sparrow" path="cantrip/projects/cantrip" />
+  <project name="sparrow-cantrip-full" revision="main" remote="sparrow" path="cantrip/projects/cantrip" />
   <!-- Download Sparrow's capdl -->
   <project name="sparrow-capdl" revision="sparrow" remote="sparrow"  path="cantrip/projects/capdl" />
   <!-- Download Sparrow's seL4_libs -->
-  <project name="cantrip/projects/seL4_libs" remote="sparrow" path="cantrip/projects/seL4_libs" />
+  <project name="sparrow-seL4_libs" revision="sparrow" remote="sparrow" path="cantrip/projects/seL4_libs" />
   <!-- Download Sparrow's seL4_tools -->
   <project name="sparrow-seL4_tools" revision="sparrow" remote="sparrow" path="cantrip/tools/seL4" />
   <!-- Download Sparrow's sel4runtime -->

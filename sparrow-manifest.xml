@@ -14,6 +14,7 @@
   <remote name="picotcp"     fetch="https://github.com/tass-belgium" />
   <remote name="seL4"        fetch="https://github.com/seL4" />
   <remote name="seL4-github" fetch="https://github.com/seL4" />
+  <remote name="nanopb"      fetch="https://github.com/nanopb" />
 
   <default remote="seL4" revision="master" />
 
@@ -53,21 +54,24 @@
   <!-- Download Sparrow camkes-tool (mods + templates) -->
   <project name="sparrow-camkes-tool" revision="sparrow" remote="sparrow" path="cantrip/projects/camkes-tool" />
   <!-- Download Sparrow's kernel (patches + drivers) -->
-  <project name="sparrow-kernel" revision="sparrow" remote="sparrow"  path="cantrip/kernel" />
+  <project name="cantrip/kernel" remote="sparrow"  path="cantrip/kernel" />
   <!-- Download CantripOS CAmkES components -->
-  <project name="sparrow-cantrip-full" revision="main" remote="sparrow" path="cantrip/projects/cantrip" />
+  <project name="cantrip/projects/processmanager" remote="sparrow" path="cantrip/projects/cantrip" />
   <!-- Download Sparrow's capdl -->
   <project name="sparrow-capdl" revision="sparrow" remote="sparrow"  path="cantrip/projects/capdl" />
   <!-- Download Sparrow's seL4_libs -->
-  <project name="sparrow-seL4_libs" revision="sparrow" remote="sparrow" path="cantrip/projects/seL4_libs" />
+  <project name="cantrip/projects/seL4_libs" remote="sparrow" path="cantrip/projects/seL4_libs" />
   <!-- Download Sparrow's seL4_tools -->
-  <project name="sparrow-seL4_tools" revision="sparrow" remote="sparrow" path="cantrip/tools/seL4" />
+  <project name="shoddan/3p/sel4/sel4_tools" remote="sparrow" path="cantrip/tools/seL4" />
   <!-- Download Sparrow's sel4runtime -->
   <project name="sparrow-sel4runtime" revision="sparrow" remote="sparrow" path="cantrip/projects/sel4runtime" />
   <!-- Download Sparrow's sel4test -->
   <project name="sparrow-sel4test" revision="sparrow" remote="sparrow" path="cantrip/projects/sel4test" />
   <!-- Download Sparrow's util_libs -->
-  <project name="sparrow-util_libs" revision="sparrow" remote="sparrow" path="cantrip/projects/util_libs" />
+  <project name="3p//sel4/util_libs" remote="sparrow" path="cantrip/projects/util_libs" />
+
+  <!-- Download nanopb for sel4test -->
+  <project name="nanopb" remote="nanopb" path="cantrip/tools/nanopb" />
 
   <!-- Download Sparrow manifest in order to setup top-level symlinks -->
   <project name="sparrow-manifest" revision="main" remote="sparrow" path="manifest">

@@ -92,7 +92,7 @@ easy-settings.cmake file; e.g. `projects/cantrip/easy-settings.cmake` has:
 set(CAPDL_LOADER_APP "cantrip-os-rootserver" CACHE STRING "")
 ```
 
-using capdl-loader-app is not advised because it lacks important functionality
+But using capdl-loader-app is *not advised* because it lacks important functionality
 found only in cantrip-os-rootserver.
 
 ## How we do software development for the Sparrow platform.
@@ -131,7 +131,8 @@ repo init -u https://github.com/AmbiML/sparrow-manifest -m sparrow-manifest.xml
 repo sync -j$(nproc)
 export PLATFORM=rpi3
 source build/setup.sh
-m simulate-debug
+m prereqs
+m simulate
 ```
 
 [Beware that if your repo tool is out of date you may need to supply `-b main`
@@ -140,9 +141,11 @@ to the init request as older versions of repo only check for a `master` branch.]
 Note the above assumes you have the follow prerequisites installed on your system
 and **in your shell's search path**:
 1. Gcc (or clang) for the target architecture
-2. Rust; at the moment this must be nightly-2021-11-05 (or be prepared to edit at least
-   build/setup.sh). Beware that we override the default TLS model to match what CAmkES
-   uses and this override is not supported by stable versions of Rust.
+2. Rust; any nightly build >=nightly-2021-11-05 should work. A default version is set
+   in the build/setup.sh script; if that is not what you are using either edit the shell
+   script or export `CANTRIP_RUST_VERSION` in each shell where you work.
+   Beware that we use various nightly-only features that are not supported by stable
+   versions of Rust (e.g. to override the default TLS model).
 3. The python tempita module.
 4. Whichever simulator seL4 expects for your target architecture; e.g. for aarch64 this
    is qemu-system-aarch64.
@@ -173,6 +176,7 @@ $ source build/setup.sh
 ROOTDIR=/<your-directory>/sparrow
 OUT=/<your-directory>/sparrow/out
 PLATFORM=rpi3
+PYTHON_SPARROW_ENV=<your-directory>/sparrow/cache/rpi3-venv
 ========================================
 
 Type 'm [target]' to build.
@@ -187,7 +191,17 @@ cantrip-clean cantrip-clean-headers cantrip-clippy cantrip-component-headers
 
 To get more information on a target, use 'hmm [target]'
 
-$ m simulate-debug
+$ m prereqs
+<your-directory>/sparrow/scripts/install-prereqs.sh \
+        -p "<your-directory>/sparrow/scripts/python-requirements.txt \
+                 " \
+        -a ""
+Installing apt package dependencies...
+Installing python package dependencies...
+Creating virtual python environment <your-directory>/sparrow/cache/rpi3-venv
+...
+Installation complete.
+$ m simulate
 ...
 info: component 'rust-std' for target 'aarch64-unknown-none' is up to date
 loading initial cache file <your-directory>/sparrow/cantrip/projects/camkes/settings.cmake
@@ -201,8 +215,8 @@ loading initial cache file <your-directory>/sparrow/cantrip/projects/camkes/sett
 [291/291] Generating images/capdl-loader-image-arm-bcm2837
 ...
 qemu-system-aarch64 -machine raspi3b -nographic -serial null -serial mon:stdio -m size=1024M -s \
--kernel /<your-directory>/sparrow/out/cantrip/aarch64-unknown-elf/debug/capdl-loader-image \
---mem-path /<your-directory>/sparrow/out/cantrip/aarch64-unknown-elf/debug/cantrip.mem
+-kernel /<your-directory>/sparrow/out/cantrip/aarch64-unknown-elf/release/capdl-loader-image \
+--mem-path /<your-directory>/sparrow/out/cantrip/aarch64-unknown-elf/release/cantrip.mem
 ELF-loader started on CPU: ARM Ltd. Cortex-A53 r0p4
   paddr=[8bd000..fed0ff]
 No DTB passed in from boot loader.
@@ -236,13 +250,13 @@ CANTRIP> cantrip_memory_manager::Global memory: 0 allocated 124501760 free, rese
 ...
 ```
 
-The `m simulate-debug` command can be run repeatedly. If you need to reset
-your setup just remove the build tree and re-run `m simulate-debug`; e.g.
+The `m simulate` command can be run repeatedly. If you need to reset
+your setup just remove the build tree and re-run `m simulate`; e.g.
 
 ``` shell
 cd sparrow
 m clean
-m simulate-debug
+m simulate
 ```
 
 ### Depending on Rust crates

@@ -146,8 +146,7 @@ and **in your shell's search path**:
    script or export `CANTRIP_RUST_VERSION` in each shell where you work.
    Beware that we use various nightly-only features that are not supported by stable
    versions of Rust (e.g. to override the default TLS model).
-3. The python tempita module.
-4. Whichever simulator seL4 expects for your target architecture; e.g. for aarch64 this
+3. Whichever simulator seL4 expects for your target architecture; e.g. for aarch64 this
    is qemu-system-aarch64.
 
 Because Sparrow is a CAmkES project you also need

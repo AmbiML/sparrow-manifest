@@ -1,0 +1,20 @@
+name: nightly
+on:
+  # Triggers the workflow every day at 23:00.
+  schedule:
+    - cron: "0 23 * * *"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  buildSparrow:
+    runs-on: ubuntu-latest
+      # Environment variables
+    env:
+    defaults:
+      run:
+    steps:
+      - name: testbuild
+        run: |
+          docker run -it us-docker.pkg.dev/cerebra-shodan-ci-public/docker/sparrowci:latest /home/script
